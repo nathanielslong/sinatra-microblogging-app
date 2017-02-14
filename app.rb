@@ -16,7 +16,7 @@ get '/sign-in' do
 end
 
 post "/sign-in" do
-  @user = User.where(username: params[:username]).first
+  @user = User.where(email: params[:email]).first
   if @user && @user.password == params[:password]
     session[:user_id] = @user_id
     flash[:notice] = "You've signed in successfully! Your name is #{@user.fname} #{@user.lname}"
