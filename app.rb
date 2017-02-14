@@ -18,7 +18,7 @@ end
 post "/sign-in" do
   @user = User.where(email: params[:email]).first
   if @user && @user.password == params[:password]
-    session[:user_id] = @user_id
+    session[:user_id] = @user.id
     flash[:notice] = "You've signed in successfully! Your name is #{@user.fname} #{@user.lname}"
   else
     flash[:notice] = "There was a problem with sign-in."
@@ -26,7 +26,8 @@ post "/sign-in" do
   redirect "/"
 end
 
-get '/sign-out' do
+get "/sign-out" do
   session.clear
-  redirect '/'
+  flash[:notice] = "You've signed out!"
+  redirect "/"
 end
