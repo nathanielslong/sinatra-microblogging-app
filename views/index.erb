@@ -1,0 +1,16 @@
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+<% if session[:user_id] != nil %>
+  <h1>You're logged in!</h1>
+<% end %>
+<h1><a href="/sign-in">Sign-in</a></h1>
+<br>
+<h1><a href="/sign-out">Sign-out</a></h1>
+<br>
+<h1><a href="/sign-up">Sign-up</a></h1>
+<br>
+<h1><a href="/post/edit">Create Posts</a></h1>
+<br>
+<h1>Your posts:</h1>
+<br>
