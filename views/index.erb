@@ -15,4 +15,7 @@
   <h1><a href="/account/edit">Edit your account details</a></h1>
   <h1><a href="/account/delete">Delete your account</a></h1>
   <h1>Your posts:</h1>
+  <% @user.posts.each do |post| %>
+    <li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
+  <% end %>
 <% end %>

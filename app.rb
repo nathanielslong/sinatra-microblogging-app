@@ -8,6 +8,9 @@ require './environments'
 enable :sessions
 
 get '/' do
+  if session[:user_id]
+    @user = User.find(session[:user_id])
+  end
   erb :index
 end
 
@@ -74,4 +77,9 @@ post '/account/edit' do
   @user.country = params[:country]
   @user.save
   redirect '/'
+end
+
+get '/posts/:id' do
+  @post = Post.find(params[:id])
+  erb :post_show
 end
