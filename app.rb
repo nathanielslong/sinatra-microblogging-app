@@ -113,3 +113,8 @@ post '/posts/:id/edit' do
   redirect '/'
 end
 
+get '/posts/:id/delete' do
+  Post.find(params[:id]).destroy
+  flash[:notice] = "Bye bye post!"
+  redirect '/'
+end

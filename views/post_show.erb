@@ -7,4 +7,5 @@
 
 <% if session[:user_id] == @post.user_id %>
   <h4><a href="/posts/<%= @post.id %>/edit">Edit your post</a></h4>
+  <h4><a href="/posts/<%= @post.id %>/delete">Delete your post</a></h4>
 <% end %>
