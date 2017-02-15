@@ -76,10 +76,28 @@ post '/account/edit' do
   @user.city = params[:city]
   @user.country = params[:country]
   @user.save
+  flash[:notice] = "Account successfully edited!"
   redirect '/'
 end
 
 get '/posts/:id' do
   @post = Post.find(params[:id])
   erb :post_show
+end
+
+get '/posts/:id/edit' do
+  @post = Post.find(params[:id])
+  erb :post_edit
+end
+
+post '/posts/:id/edit' do
+  @post = Post.find(params[:id])
+  @post.title = params[:title]
+  @post.body = params[:body]
+  @post.genre = params[:genre]
+  @post.album = params[:album]
+  @post.artist = params[:artist]
+  @post.save
+  flash[:notice] = "Post successfully edited!"
+  redirect '/'
 end
