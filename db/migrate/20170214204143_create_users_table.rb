@@ -5,7 +5,7 @@ class CreateUsersTable < ActiveRecord::Migration[5.0]
       t.string :password
       t.string :fname
       t.string :lname
-      t.datetime :birthday
+      t.date :birthday
       t.string :city
       t.string :country
       t.timestamp
