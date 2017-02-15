@@ -54,6 +54,9 @@ post '/sign-up' do
   redirect '/'
 end
 
+get '/users/:id/profile' do
+end
+
 get '/users/:id/delete' do
   User.find(session[:user_id]).destroy
   session.clear

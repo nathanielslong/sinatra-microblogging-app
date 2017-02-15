@@ -1,21 +1,6 @@
 <% if flash[:notice] %>
   <%= flash[:notice] %>
 <% end %>
-<% if session[:user_id] == nil %>
-  <h1><a href="/sign-in">Sign-in</a></h1>
-  <h1><a href="/sign-up">Sign-up</a></h1>
-<% end %>
-<% if session[:user_id] != nil %>
-  <h1>You're logged in!</h1>
-  <h1><a href="/sign-out">Sign-out</a></h1>
-  <h1><a href="/posts/new">Create posts</a></h1>
-  <h1><a href="/users/<%= session[:user_id] %>/edit">Edit your account details</a></h1>
-  <h1><a href="/users/<%= session[:user_id] %>/delete">Delete your account</a></h1>
-  <h1>Your posts:</h1>
-  <% @user.posts.each do |post| %>
-    <li><a href="/posts/<%= post.id %>"><%= post.title %></a></li>
-  <% end %>
-<% end %>
 <div class="jumbotron">
   <div class="container">
     <h2>QuickCuts</h2>
