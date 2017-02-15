@@ -1,0 +1,39 @@
+body {
+  min-height: 2000px;
+}
+
+.normal {
+  xheight: 75px; /* this causes drop down to lose color ??? */
+  transition: 0.5s;
+}
+
+.normal .navbar-right {
+  padding-top: 12px;
+  transition: 0.5s;
+}
+
+.navbar-brand {
+  padding: 0px !important;
+  transition: 0.5s;
+}
+
+.navbar-brand img {
+  padding: 5px;
+  height: 55px;
+  transition: 0.5s;
+}
+
+.shrink {
+  height: 50px;
+  transition: 0.5s;
+}
+
+.shrink .navbar-right {
+  padding-top: 0px;
+  transition: 0.5s;
+}
+
+.shrink .navbar-brand img {
+  max-height: 50px;
+  transition: 0.5s;
+}
