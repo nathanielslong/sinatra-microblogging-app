@@ -4,14 +4,15 @@
 <% if session[:user_id] != nil %>
   <h1>You're logged in!</h1>
 <% end %>
-<h1><a href="/sign-in">Sign-in</a></h1>
-<br>
-<h1><a href="/sign-out">Sign-out</a></h1>
-<br>
-<h1><a href="/sign-up">Sign-up</a></h1>
-<br>
-<h1><a href="/post/edit">Create posts</a></h1>
-<br>
-<h1><a href="/delete-account">Delete your account</a></h1>
-<h1>Your posts:</h1>
-<br>
+<% if session[:user_id] == nil %>
+  <h1><a href="/sign-in">Sign-in</a></h1>
+  <h1><a href="/sign-up">Sign-up</a></h1>
+<% end %>
+<% if session[:user_id] != nil %>
+  <h1><a href="/sign-out">Sign-out</a></h1>
+  <h1><a href="/post/edit">Create posts</a></h1>
+  <h1><a href="/post/edit">Create posts</a></h1>
+  <h1><a href="/account/edit">Edit your account details</a></h1>
+  <h1><a href="/account/delete">Delete your account</a></h1>
+  <h1>Your posts:</h1>
+<% end %>
