@@ -85,13 +85,8 @@ get '/posts/new' do
 end
 
 post '/posts' do
-  @post = Post.new
-  @post.title = params[:title]
-  @post.body = params[:body]
-  @post.genre = params[:genre]
-  @post.album = params[:album]
-  @post.artist = params[:artist]
-  @post.save
+  @user = User.find(session[:user_id])
+  @user.posts.create(title: params[:title], body: params[:body], genre: params[:genre], album: params[:album], artist: params[:artist])
   flash[:notice] = "Post successfully created!"
   redirect '/'
 end
