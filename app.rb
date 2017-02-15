@@ -80,6 +80,22 @@ post '/account/edit' do
   redirect '/'
 end
 
+get '/posts/new' do
+  erb :create_post
+end
+
+post '/posts' do
+  @post = Post.new
+  @post.title = params[:title]
+  @post.body = params[:body]
+  @post.genre = params[:genre]
+  @post.album = params[:album]
+  @post.artist = params[:artist]
+  @post.save
+  flash[:notice] = "Post successfully created!"
+  redirect '/'
+end
+
 get '/posts/:id' do
   @post = Post.find(params[:id])
   erb :post_show
@@ -101,3 +117,4 @@ post '/posts/:id/edit' do
   flash[:notice] = "Post successfully edited!"
   redirect '/'
 end
+
