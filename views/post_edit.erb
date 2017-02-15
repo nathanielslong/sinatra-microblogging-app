@@ -1,3 +1,4 @@
+<% if session[:user_id] == @post.user_id %>
 <h1>Edit post</h1>
 
 <form action="/posts/<%= @post.id %>/edit" method="POST">
@@ -13,3 +14,6 @@
   <input type="text" name="artist" value="<%= @post.artist %>">
   <input type="submit">
 </form>
+<% else %>
+  <h1>You're not logged in or the user who created this post, you can't edit this post! I don't even know how you got here!</h1>
+<% end %>
