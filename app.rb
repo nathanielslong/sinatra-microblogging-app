@@ -50,3 +50,10 @@ post '/sign-up' do
   flash[:notice] = "You've signed up successfully!"
   redirect '/'
 end
+
+get '/delete-account' do
+  User.find(session[:user_id]).destroy
+  session.clear
+  flash[:notice] = "Sad to see you go!"
+  redirect '/'
+end
