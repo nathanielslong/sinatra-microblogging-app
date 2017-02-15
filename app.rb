@@ -54,19 +54,19 @@ post '/sign-up' do
   redirect '/'
 end
 
-get '/account/delete' do
+get '/users/:id/delete' do
   User.find(session[:user_id]).destroy
   session.clear
   flash[:notice] = "Sad to see you go!"
   redirect '/'
 end
 
-get '/account/edit' do
+get '/users/:id/edit' do
   @user = User.find(session[:user_id])
   erb :edit_account
 end
 
-post '/account/edit' do
+post '/users/:id/edit' do
   @user = User.find(session[:user_id])
   @user.email = params[:email]
   @user.password = params[:password]

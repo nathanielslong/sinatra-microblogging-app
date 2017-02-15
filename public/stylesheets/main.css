@@ -1,0 +1,62 @@
+body {
+  margin-bottom: 150px; }
+
+.normal {
+  xheight: 75px;
+  /* this causes drop down to lose color ??? */
+  transition: 0.5s; }
+
+.normal .navbar-right {
+  padding-top: 12px;
+  transition: 0.5s; }
+
+.navbar-brand {
+  padding: 0px !important;
+  transition: 0.5s; }
+
+.navbar-brand img {
+  padding: 5px;
+  height: 55px;
+  transition: 0.5s; }
+
+.shrink {
+  height: 50px;
+  transition: 0.5s; }
+
+.shrink .navbar-right {
+  padding-top: 0px;
+  transition: 0.5s; }
+
+.shrink .navbar-brand img {
+  max-height: 50px;
+  transition: 0.5s; }
+
+html {
+  position: relative;
+  min-height: 100%; }
+
+.footer {
+  position: absolute;
+  float: none;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+  background-color: #111;
+  text-align: center;
+  vertical-align: middle; }
+
+.container-footer {
+  width: 100%;
+  margin-top: 50px; }
+
+.fa {
+  opacity: 0.7;
+  transition: 1s;
+  -webkit-transition: 1s; }
+
+.fa:hover {
+  opacity: 1;
+  transition: 1s;
+  -webkit-transition: 1s; }
+
+/*# sourceMappingURL=main.css.map */
