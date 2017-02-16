@@ -22,6 +22,9 @@
             <div class="media-body">
               <h4 class="media-heading"><a href="/users/<%= @user.id %>"><%= "#{@user.fname} #{@user.lname}" %></a></h4>
               <p><%= post.body %></p>
+              <% if session[:user_id] == @user.id %>
+                <a href="/posts/<%= post.id %>/edit">Edit this post</a>
+              <% end %>
             </div>
           </div>
         <% end %>

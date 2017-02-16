@@ -60,4 +60,8 @@ html {
   transition: 1s;
   -webkit-transition: 1s; }
 
+.media-body {
+  border-left: 1px solid black;
+  padding: 1px; }
+
 /*# sourceMappingURL=main.css.map */
