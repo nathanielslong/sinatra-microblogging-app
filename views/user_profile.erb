@@ -1,0 +1,35 @@
+<% if session[:user_id] != nil %>
+
+  <h1><%= "#{@user.fname} #{@user.lname}'s profile!"%></h1>
+  <% if session[:user_id] == @user.id %>
+    <h2><a href="/users/<%= @user.id %>/edit">Edit Your Account </a></h2>
+  <% end %>
+  <div class="panel panel-default">
+    <div class="panel-heading">User Posts</div>
+    <div class="panel-body">
+      <% if @user.posts.count == 0 %>
+        <div class="media">
+          No posts to display!
+        </div>
+
+      <% else %>
+
+        <% @user.posts.each do |post| %>
+          <div class="media">
+            <a class="pull-left" href="#">
+              <img class="media-object" src=<%= @user.picture %>>
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading"><a href="/users/<%= @user.id %>"><%= "#{@user.fname} #{@user.lname}" %></a></h4>
+              <p><%= post.body %></p>
+            </div>
+          </div>
+        <% end %>
+
+    </div>
+  </div>
+<% end %>
+
+<% else %>
+  <h1>You must be logged in to look at member profiles!</h1>
+<% end %>

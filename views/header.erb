@@ -15,13 +15,16 @@
         <li><a href="/">Home</a>
         </li>
         <% if session[:user_id] == nil %>
-          <li class="active"><a href="/">Sign Up</a>
+          <li><a href="/sign-in">Sign In</a>
+          </li>
+          <li><a href="/sign-up">Sign Up</a>
           </li>
         <% end %>
+
         <% if session[:user_id] != nil %>
-          <li><a href="/posts/new">Create Post</a>
-          </li>
           <li><a href="/users/<%= session[:user_id] %>">Profile</a>
+          </li>
+          <li><a href="/posts/new">Create Post</a>
           </li>
           <li><a href="/sign-out">Sign Out</a>
           </li>

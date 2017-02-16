@@ -8,7 +8,8 @@ class CreateUsersTable < ActiveRecord::Migration[5.0]
       t.date :birthday
       t.string :city
       t.string :country
-      t.timestamp
+      t.text :picture
+      t.timestamps
     end
 
   end
