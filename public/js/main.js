@@ -3,5 +3,6 @@ $(window).scroll(function() {
     $('.navbar').addClass('shrink');
   }
   else {
-    $('.navbar').removeClass('shrink'); }
+    $('.navbar').removeClass('shrink');
+  }
 });

@@ -20,6 +20,7 @@
           <li><a href="/sign-up">Sign Up</a>
           </li>
         <% end %>
+
         <% if session[:user_id] != nil %>
           <li><a href="/users/<%= session[:user_id] %>/profile">Profile</a>
           </li>
