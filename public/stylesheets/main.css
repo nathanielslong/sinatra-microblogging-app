@@ -64,4 +64,8 @@ html {
   border-left: 1px solid black;
   padding: 1px; }
 
+.media-object {
+  width: 50px;
+  height: 60px; }
+
 /*# sourceMappingURL=main.css.map */

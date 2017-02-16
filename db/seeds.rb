@@ -11,7 +11,7 @@ require 'faker'
     user.birthday = Faker::Date.between(40.years.ago, 20.years.ago)
     user.city = Faker::Address.city
     user.country = Faker::Address.country
-    user.picture = Faker::LoremPixel.image("50x50")
+    user.picture = Faker::Avatar.image
     user.save
   end
 
