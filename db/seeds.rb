@@ -22,7 +22,7 @@ end
 users = User.all
 
 users.each do |user|
-  10.times do
+  3.times do
     user.posts.create(body: Faker::Hacker.say_something_smart,
                       genre: Faker::Pokemon.name,
                       album: Faker::Book.title,
