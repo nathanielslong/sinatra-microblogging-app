@@ -22,7 +22,7 @@
         <% end %>
 
         <% if session[:user_id] != nil %>
-          <li><a href="/users/<%= session[:user_id] %>/profile">Profile</a>
+          <li><a href="/users/<%= session[:user_id] %>">Profile</a>
           </li>
           <li><a href="/posts/new">Create Post</a>
           </li>

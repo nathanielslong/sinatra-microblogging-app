@@ -65,7 +65,9 @@ post '/sign-up' do
   redirect '/'
 end
 
-get '/users/:id/profile' do
+get '/users/:id' do
+  @user = User.find(params[:id])
+  erb :user_profile
 end
 
 get '/users/:id/delete' do
@@ -80,19 +82,20 @@ end
 
 get '/users/:id/edit' do
   @user = User.find(session[:user_id])
+
   erb :edit_account
 end
 
 post '/users/:id/edit' do
   @user = User.find(session[:user_id])
-  @user.email = params[:email]
-  @user.password = params[:password]
-  @user.fname = params[:fname]
-  @user.lname = params[:lname]
-  @user.birthday = params[:birthday]
-  @user.city = params[:city]
-  @user.country = params[:country]
-  @user.save
+
+  @user.update_attributes(email: params[:email],
+                         password: params[:password],
+                         fname: params[:fname],
+                         lname: params[:lname],
+                         birthday: params[:birthday],
+                         city: params[:city],
+                         country: params[:country])
 
   flash[:notice] = "Account successfully edited!"
 
@@ -106,7 +109,10 @@ end
 post '/posts' do
   @user = User.find(session[:user_id])
 
-  @user.posts.create(body: params[:body], genre: params[:genre], album: params[:album], artist: params[:artist])
+  @user.posts.create(body: params[:body],
+                     genre: params[:genre],
+                     album: params[:album],
+                     artist: params[:artist])
 
   flash[:notice] = "Post successfully created!"
 
@@ -133,8 +139,6 @@ post '/posts/:id/edit' do
                          album: params[:album],
                          artist: params[:artist])
 
-  @post.save
-
   flash[:notice] = "Post successfully edited!"
 
   redirect '/'
@@ -142,6 +146,8 @@ end
 
 get '/posts/:id/delete' do
   Post.find(params[:id]).destroy
+
   flash[:notice] = "Bye bye post!"
+
   redirect '/'
 end

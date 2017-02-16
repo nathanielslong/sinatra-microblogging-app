@@ -6,7 +6,7 @@ class CreatePostsTable < ActiveRecord::Migration[5.0]
       t.string :genre
       t.string :album
       t.string :artist
-      t.timestamp
+      t.timestamps
     end
 
   end

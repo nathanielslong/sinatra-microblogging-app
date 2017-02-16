@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'activerecord'
+gem 'faker'
 gem 'rake'
 gem 'sinatra'
 gem 'sinatra-activerecord'
