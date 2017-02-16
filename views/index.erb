@@ -11,8 +11,16 @@
 <div class="panel panel-default">
   <div class="panel-heading">Recent Posts</div>
   <div class="panel-body">
-<% @posts.each do |post| %>
-  <%= post.body %>
-<% end %>
+    <% @posts.each do |post| %>
+      <div class="media">
+        <a class="pull-left" href="#">
+          <img class="media-object" src=<%= User.find(post.user_id).picture %>>
+        </a>
+        <div class="media-body">
+          <h4 class="media-heading"><a href="/users/<%= post.user_id %>"><%= "#{User.find(post.user_id).fname} #{User.find(post.user_id).fname}" %></a></h4>
+          <p><%= post.body %></p>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
