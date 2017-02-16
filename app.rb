@@ -91,12 +91,12 @@ post '/users/:id/edit' do
   @user = User.find(session[:user_id])
 
   @user.update_attributes(email: params[:email],
-                         password: params[:password],
-                         fname: params[:fname],
-                         lname: params[:lname],
-                         birthday: params[:birthday],
-                         city: params[:city],
-                         country: params[:country])
+                          password: params[:password],
+                          fname: params[:fname],
+                          lname: params[:lname],
+                          birthday: params[:birthday],
+                          city: params[:city],
+                          country: params[:country])
 
   flash[:notice] = "Account successfully edited!"
 
@@ -136,9 +136,9 @@ post '/posts/:id/edit' do
   @post = Post.find(params[:id])
 
   @post.update_attributes(body: params[:body],
-                         genre: params[:genre],
-                         album: params[:album],
-                         artist: params[:artist])
+                          genre: params[:genre],
+                          album: params[:album],
+                          artist: params[:artist])
 
   flash[:notice] = "Post successfully edited!"
 

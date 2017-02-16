@@ -1,5 +1,5 @@
 <% if session[:user_id] != nil %>
-  <form>
+  <form action="/users/<%= @user.id %>/edit" method="POST">
     <div class="container">
       <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -22,7 +22,7 @@
                 <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input type="text" name = "lname "class="form-control" value=<%= @user.lname %> />
+                    <input type="text" name ="lname" class="form-control" value=<%= @user.lname %> />
                   </div>
                 </div>
                 <div class="form-group">
@@ -35,7 +35,7 @@
                 <div class="form-group">
                   <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" class="form-control" value=<%= @user.password %>/>
+                    <input type="password" name="password" class="form-control" value=<%= @user.password %>/>
                   </div>
                 </div>
 
