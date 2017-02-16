@@ -1,8 +1,14 @@
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+
 <% if session[:user_id] != nil %>
 
   <h1><%= "#{@user.fname} #{@user.lname}'s profile!"%></h1>
+  <img src=<%= @user.picture %> alt="">
   <% if session[:user_id] == @user.id %>
-    <h2><a href="/users/<%= @user.id %>/edit">Edit Your Account </a></h2>
+    <h3><a href="/users/<%= @user.id %>/edit">Edit your account </a></h2>
+    <h3><a href="/users/<%= @user.id %>/delete">Delete your account </a></h2>
   <% end %>
   <div class="panel panel-default">
     <div class="panel-heading">User Posts</div>
@@ -22,8 +28,10 @@
             <div class="media-body">
               <h4 class="media-heading"><a href="/users/<%= @user.id %>"><%= "#{@user.fname} #{@user.lname}" %></a></h4>
               <p><%= post.body %></p>
+              <a href="/posts/<%= post.id %>">Link to this post</a>
               <% if session[:user_id] == @user.id %>
-                <a href="/posts/<%= post.id %>/edit">Edit this post</a>
+                <span> | </span><a href="/posts/<%= post.id %>/edit">Edit this post</a><span> | </span>
+                <a href="/posts/<%= post.id %>/delete">Delete this post</a>
               <% end %>
             </div>
           </div>

@@ -11,7 +11,7 @@ require 'faker'
     user.birthday = Faker::Date.between(40.years.ago, 20.years.ago)
     user.city = Faker::Address.city
     user.country = Faker::Address.country
-    user.picture = Faker::LoremPixel.image("50x50")
+    user.picture = Faker::Avatar.image
     user.save
   end
 
@@ -22,7 +22,7 @@ end
 users = User.all
 
 users.each do |user|
-  10.times do
+  3.times do
     user.posts.create(body: Faker::Hacker.say_something_smart,
                       genre: Faker::Pokemon.name,
                       album: Faker::Book.title,

@@ -80,6 +80,7 @@ get '/users/:id' do
 end
 
 get '/users/:id/delete' do
+  Post.where(user_id: session[:user_id]).destroy_all
   User.find(session[:user_id]).destroy
 
   session.clear
@@ -104,16 +105,17 @@ post '/users/:id/edit' do
                           lname: params[:lname],
                           birthday: params[:birthday],
                           city: params[:city],
-                          country: params[:country])
+                          country: params[:country],
+                          picture: params[:picture])
 
-  if user.save
-    session[:user_id] = user.id
+  if @user.save
+    session[:user_id] = @user.id
 
     flash[:notice] = "Account successfully edited!"
 
     redirect '/'
   else
-    flash[:notice] = user.errors.full_messages.to_sentence
+    flash[:notice] = @user.errors.full_messages.to_sentence
 
     redirect '/'
   end
