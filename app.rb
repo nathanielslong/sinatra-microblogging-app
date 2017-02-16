@@ -13,7 +13,7 @@ get '/' do
     @user = User.find(session[:user_id])
   end
 
-  @posts = Post.all
+  @posts = Post.last(10)
 
   erb :index
 end
