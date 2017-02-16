@@ -3,8 +3,8 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'sqlite3'
-require './models'
 require './environments'
+require './models'
 
 enable :sessions
 
@@ -49,20 +49,28 @@ get '/sign-up' do
 end
 
 post '/sign-up' do
-  session[:user_id] = User.new.tap do |user|
-    user.email = params[:email]
-    user.password = params[:password]
-    user.fname = params[:fname]
-    user.lname = params[:lname]
-    user.birthday = params[:birthday]
-    user.city = params[:city]
-    user.country = params[:country]
-    user.save
-  end.id
+  user = User.new
 
-  flash[:notice] = "You've signed up successfully!"
+  user.email = params[:email]
+  user.password = params[:password]
+  user.fname = params[:fname].capitalize
+  user.lname = params[:lname].capitalize
+  user.birthday = params[:birthday]
+  user.city = params[:city].capitalize
+  user.country = params[:country].capitalize
 
-  redirect '/'
+  if user.save
+    session[:user_id] = user.id
+
+    flash[:notice] = "You've signed up successfully!"
+
+    redirect '/'
+  else
+    flash[:notice] = user.errors.full_messages.to_sentence
+
+    redirect '/'
+  end
+
 end
 
 get '/users/:id' do
@@ -90,7 +98,7 @@ end
 post '/users/:id/edit' do
   @user = User.find(session[:user_id])
 
-  @user.update_attributes(email: params[:email],
+  @user.assign_attributes(email: params[:email],
                           password: params[:password],
                           fname: params[:fname],
                           lname: params[:lname],
@@ -98,9 +106,18 @@ post '/users/:id/edit' do
                           city: params[:city],
                           country: params[:country])
 
-  flash[:notice] = "Account successfully edited!"
+  if user.save
+    session[:user_id] = user.id
 
-  redirect '/'
+    flash[:notice] = "Account successfully edited!"
+
+    redirect '/'
+  else
+    flash[:notice] = user.errors.full_messages.to_sentence
+
+    redirect '/'
+  end
+
 end
 
 get '/posts/new' do
@@ -110,14 +127,21 @@ end
 post '/posts' do
   @user = User.find(session[:user_id])
 
-  @user.posts.create(body: params[:body],
+  new_post = @user.posts.new(body: params[:body],
                      genre: params[:genre],
                      album: params[:album],
                      artist: params[:artist])
 
-  flash[:notice] = "Post successfully created!"
+  if new_post.save
+    flash[:notice] = "Post successfully created!"
 
-  redirect '/'
+    redirect '/'
+  else
+    flash[:notice] = new_post.errors.full_messages.to_sentence
+
+    redirect '/'
+  end
+
 end
 
 get '/posts/:id' do
