@@ -3,10 +3,13 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'sqlite3'
-require './environments'
 require './models'
 
 enable :sessions
+
+configure :development do
+  set :database, 'sqlite3:quickcuts.sqlite3'
+end
 
 get '/' do
   if session[:user_id]
