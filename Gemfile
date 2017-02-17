@@ -8,5 +8,3 @@ gem 'rake'
 gem 'sinatra'
 gem 'sinatra-activerecord'
 gem 'sinatra-flash'
-
-end
