@@ -136,10 +136,7 @@ get '/users/:id/follow' do
 end
 
 post '/users/:id/follow' do
-  # user = User.find(params[:id])
-  # current_user = User.find(session[:user_id])
-
-  # current_user.follow(user) if user
+  Relationship.where(followed_id: params[:id], follower_id: session[:user_id]).destroy_all
 
   flash[:notice] = "You've stopped following this user!"
 
