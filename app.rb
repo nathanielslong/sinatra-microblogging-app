@@ -124,6 +124,25 @@ post '/users/:id/edit' do
 
 end
 
+get '/users/:id/follow' do
+  user = User.find(params[:id])
+  current_user = User.find(session[:user_id])
+
+  current_user.follow!(user) if user
+
+  flash[:notice] = "You've followed successfully!"
+
+  redirect '/'
+end
+
+post '/users/:id/follow' do
+  Relationship.where(followed_id: params[:id], follower_id: session[:user_id]).destroy_all
+
+  flash[:notice] = "You've stopped following this user!"
+
+  redirect '/'
+end
+
 get '/posts/new' do
   erb :create_post
 end
@@ -132,9 +151,9 @@ post '/posts' do
   @user = User.find(session[:user_id])
 
   new_post = @user.posts.new(body: params[:body],
-                     genre: params[:genre],
-                     album: params[:album],
-                     artist: params[:artist])
+                             genre: params[:genre],
+                             album: params[:album],
+                             artist: params[:artist])
 
   if new_post.save
     flash[:notice] = "Post successfully created!"
