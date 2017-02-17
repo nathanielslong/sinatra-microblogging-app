@@ -2,6 +2,7 @@
   <div class="container">
     <h2>QuickCuts</h2>
     <p>Succinct music reviews, period.</p>
+    <p>If the review intrigues you, click on it to find out what's being reviewed. Discover new music through others' descriptions.</p>
   </div>
 </div>
 <div class="panel panel-default">
@@ -13,7 +14,7 @@
           <img class="media-object" src=<%= User.find(post.user_id).picture %>>
         </a>
         <div class="media-body">
-          <h4 class="media-heading"><a href="/users/<%= post.user_id %>"><%= "#{User.find(post.user_id).fname} #{User.find(post.user_id).fname}" %></a></h4>
+          <h4 class="media-heading"><a href="/users/<%= post.user_id %>"><%= "#{User.find(post.user_id).fname} #{User.find(post.user_id).lname}" %></a></h4>
           <p><%= post.body %></p>
           <a href="/posts/<%= post.id %>">Link to this post</a>
         </div>
