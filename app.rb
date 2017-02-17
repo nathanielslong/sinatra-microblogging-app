@@ -2,8 +2,6 @@ require 'pg'
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/flash'
-require 'sqlite3'
-require './environments'
 require './models'
 
 enable :sessions
