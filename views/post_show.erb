@@ -1,9 +1,17 @@
-<p><%= @post.body %></p>
-<h5>Genre: <%= @post.genre %></h5>
-<h5>Album: <%= @post.album %></h5>
-<h5>Artist: <%= @post.artist%></h5>
-
-<% if session[:user_id] == @post.user_id %>
-  <h4><a href="/posts/<%= @post.id %>/edit">Edit your post</a></h4>
-  <h4><a href="/posts/<%= @post.id %>/delete">Delete your post</a></h4>
-<% end %>
+<div class="media">
+  <a class="pull-left" href="#">
+    <img class="" src=<%= @user.picture %>>
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading"><a href="/users/<%= @user.id %>"><%= "#{@user.fname} #{@user.lname}" %></a></h4>
+    <p><%= @post.body %></p>
+    <h5>Genre: <%= @post.genre %></h5>
+    <h5>Album: <%= @post.album %></h5>
+    <h5>Artist: <%= @post.artist%></h5>
+    <a href="/posts/<%= @post.id %>">Link to this post</a>
+    <% if session[:user_id] == @user.id %>
+      <span> | </span><a href="/posts/<%= @post.id %>/edit">Edit this post</a><span> | </span>
+      <a href="/posts/<%= @post.id %>/delete">Delete this post</a>
+    <% end %>
+  </div>
+</div>
