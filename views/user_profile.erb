@@ -7,14 +7,28 @@
   <h1><%= "#{@user.fname} #{@user.lname}'s profile!"%></h1>
   <img src=<%= @user.picture %> alt="">
   <h2><%= "#{@user.city}, #{@user.country}"%></h2>
+  <h3><%= "#{@user.followers.count} followers, #{@user.followed.count} followed." %></h3>
+
+
   <% if session[:user_id] == @user.id %>
     <form action="/users/<%= @user.id %>/edit" method="GET">
       <button class="btn-link">Edit your account</button>
     </form>
-    <button class="span4 proj-div btn-link" data-toggle="modal" data-target="#GSCCModal">Delete your account</button>
+    <button class="span4 proj-div btn-link" data-toggle="modal" data-target="#deleteModal">Delete your account</button>
+
+  <% elsif @user.followers.include?(User.find(session[:user_id])) %>
+
+    <h3>You follow this user!</h3>
+    <form action="/users/<%= @user.id %>/follow" method="POST">
+      <button class="btn-link">Stop following this user</button>
+    </form>
+  <% else %>
+    <form action="/users/<%= @user.id %>/follow" method="GET">
+      <button class="btn-link">Follow this user</button>
+    </form>
   <% end %>
 
-  <div id="GSCCModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

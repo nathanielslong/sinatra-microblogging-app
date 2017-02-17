@@ -10,13 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214204328) do
-
-  create_table "groups", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20170217154059) do
 
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
@@ -29,13 +23,9 @@ ActiveRecord::Schema.define(version: 20170214204328) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "usergroups", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_usergroups_on_group_id"
-    t.index ["user_id"], name: "index_usergroups_on_user_id"
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
   end
 
   create_table "users", force: :cascade do |t|
