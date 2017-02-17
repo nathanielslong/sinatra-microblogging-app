@@ -148,6 +148,7 @@ end
 
 get '/posts/:id' do
   @post = Post.find(params[:id])
+  @user = User.find(@post.user_id)
 
   erb :post_show
 end
@@ -161,14 +162,23 @@ end
 post '/posts/:id/edit' do
   @post = Post.find(params[:id])
 
-  @post.update_attributes(body: params[:body],
+  @post.assign_attributes(body: params[:body],
                           genre: params[:genre],
                           album: params[:album],
                           artist: params[:artist])
 
-  flash[:notice] = "Post successfully edited!"
+  if @post.save
 
-  redirect '/'
+    flash[:notice] = "Post successfully edited!"
+
+    redirect '/'
+
+  else
+    flash[:notice] = @post.errors.full_messages.to_sentence
+
+    redirect '/'
+  end
+
 end
 
 get '/posts/:id/delete' do
