@@ -63,7 +63,7 @@
               <img class="media-object" src=<%= @user.picture %>>
             </a>
             <div class="media-body">
-              <h4 class="media-heading"><a href="/users/<%= @user.id %>"><%= "#{@user.fname} #{@user.lname}" %></a></h4>
+              <h4 class="media-heading"><a href="/users/<%= @user.id %>"><%= "#{@user.full_name}" %></a></h4>
               <p><%= post.body %></p>
               <a href="/posts/<%= post.id %>">Link to this post</a>
               <% if session[:user_id] == @user.id %>

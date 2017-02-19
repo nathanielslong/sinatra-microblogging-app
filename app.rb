@@ -12,7 +12,7 @@ end
 
 get '/' do
   if session[:user_id]
-    @user = User.find(session[:user_id])
+    @user = logged_in 
   end
 
   @posts = Post.last(10)
@@ -30,7 +30,7 @@ post '/sign-in' do
   if @user && @user.password == params[:password]
     session[:user_id] = @user.id
 
-    flash[:notice] = "You've signed in successfully! Your name is #{@user.fname} #{@user.lname}"
+    flash[:notice] = "You've signed in successfully! Your name is #{@user.full_name}."
   else
     flash[:notice] = "There was a problem with sign-in."
   end
@@ -83,7 +83,7 @@ end
 
 get '/users/:id/delete' do
   Post.where(user_id: session[:user_id]).destroy_all
-  User.find(session[:user_id]).destroy
+  logged_in.destroy
 
   session.clear
 
@@ -93,13 +93,13 @@ get '/users/:id/delete' do
 end
 
 get '/users/:id/edit' do
-  @user = User.find(session[:user_id])
+  @user = logged_in
 
   erb :edit_account
 end
 
 post '/users/:id/edit' do
-  @user = User.find(session[:user_id])
+  @user = logged_in
 
   @user.assign_attributes(email: params[:email],
                           password: params[:password],
@@ -126,7 +126,7 @@ end
 
 get '/users/:id/follow' do
   user = User.find(params[:id])
-  current_user = User.find(session[:user_id])
+  current_user = logged_in
 
   current_user.follow!(user) if user
 
@@ -148,7 +148,7 @@ get '/posts/new' do
 end
 
 post '/posts' do
-  @user = User.find(session[:user_id])
+  @user = logged_in
 
   new_post = @user.posts.new(body: params[:body],
                              genre: params[:genre],
@@ -168,20 +168,20 @@ post '/posts' do
 end
 
 get '/posts/:id' do
-  @post = Post.find(params[:id])
+  @post = current_post
   @user = User.find(@post.user_id)
 
   erb :post_show
 end
 
 get '/posts/:id/edit' do
-  @post = Post.find(params[:id])
+  @post = current_post
 
   erb :post_edit
 end
 
 post '/posts/:id/edit' do
-  @post = Post.find(params[:id])
+  @post = current_post
 
   @post.assign_attributes(body: params[:body],
                           genre: params[:genre],
@@ -203,9 +203,17 @@ post '/posts/:id/edit' do
 end
 
 get '/posts/:id/delete' do
-  Post.find(params[:id]).destroy
+  current_post.destroy
 
   flash[:notice] = "Bye bye post!"
 
   redirect '/'
+end
+
+def current_post
+  Post.find(params[:id])
+end
+
+def logged_in
+  User.find(session[:user_id])
 end
