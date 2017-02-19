@@ -14,7 +14,7 @@
           <img class="media-object" src=<%= User.find(post.user_id).picture %>>
         </a>
         <div class="media-body">
-          <h4 class="media-heading"><a href="/users/<%= post.user_id %>"><%= "#{User.find(post.user_id).fname} #{User.find(post.user_id).lname}" %></a></h4>
+          <h4 class="media-heading"><a href="/users/<%= post.user_id %>"><%= "#{User.find(post.user_id).full_name}" %></a></h4>
           <p><%= post.body %></p>
           <a href="/posts/<%= post.id %>">Link to this post</a>
         </div>

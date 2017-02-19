@@ -7,12 +7,17 @@ class User < ActiveRecord::Base
   has_many :reverse_relationships, foreign_key: :followed_id, class_name: 'Relationship'
   has_many :followers, through: :reverse_relationships, source: :follower
 
+  validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/  }
+  validates_length_of :password, minimum: 7
+
   def follow!(user)
     followed << user
   end
 
-  validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/  }
-  validates_length_of :password, minimum: 7
+  def full_name
+    self.fname + " " + self.lname
+  end
+
 end
 
 class Post < ActiveRecord::Base

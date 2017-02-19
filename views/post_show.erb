@@ -3,7 +3,7 @@
     <img class="" src=<%= @user.picture %>>
   </a>
   <div class="media-body">
-    <h4 class="media-heading"><a href="/users/<%= @user.id %>"><%= "#{@user.fname} #{@user.lname}" %></a></h4>
+    <h4 class="media-heading"><a href="/users/<%= @user.id %>"><%= "#{@user.full_name}" %></a></h4>
     <p><%= @post.body %></p>
     <h5>Genre: <%= @post.genre %></h5>
     <h5>Album: <%= @post.album %></h5>
