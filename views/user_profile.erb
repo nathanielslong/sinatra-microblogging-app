@@ -88,21 +88,22 @@
 
     <% else %>
 
-      <% posts.each do |post| %>
+      <% while i < posts.count %>
         <div class="media">
           <a class="pull-left" href="#">
-            <img class="media-object" src=<%= Post.find(post.to_i) %>>
+            <img class="media-object" src=<%= User.where(posts[counter].user_id) %>>
           </a>
           <div class="media-body">
-            <h4 class="media-heading"><a href="/users/<%= Post.find(post.to_i).user_id %>"><%= "#{Post.find(post.to_i).full_name}" %></a></h4>
-            <p><%= post.body %></p>
-            <a href="/posts/<%= post.id %>">Link to this post</a>
+            <h4 class="media-heading"><a href="/users/<%= posts[counter].user_id %>"><%= "#{User.where(posts[counter]).fullname}" %></a></h4>
+            <p><%= posts[counter].body %></p>
+            <a href="/posts/<%= posts[counter].id %>">Link to this post</a>
             <% if session[:user_id] == @user.id %>
-              <span> | </span><a href="/posts/<%= post.id %>/edit">Edit this post</a><span> | </span>
-              <a href="/posts/<%= post.id %>/delete">Delete this post</a>
+              <span> | </span><a href="/posts/<%= posts[counter].id %>/edit">Edit this post</a><span> | </span>
+              <a href="/posts/<%= posts[counter].id %>/delete">Delete this post</a>
             <% end %>
           </div>
         </div>
+        <% counter += 1 %>
       <% end %>
 
   </div>

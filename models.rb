@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates_length_of :password, minimum: 7
   
   def feed
-    posts = Post.where("user_id IN (?) OR user_id = ?", followed_ids, id).map(&:id)
+    posts = Post.where("user_id IN (?) OR user_id = ?", followed_ids, id).to_a
   end
 
   def follow!(user)
