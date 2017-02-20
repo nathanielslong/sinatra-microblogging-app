@@ -78,6 +78,37 @@
   </div>
 <% end %>
 
+<div class="panel panel-default">
+  <div class="panel-heading">User Posts</div>
+  <div class="panel-body">
+    <% if posts.count == 0 %>
+      <div class="media">
+        No posts to display!
+      </div>
+
+    <% else %>
+
+      <% posts.each do |post| %>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src=<%= Post.find(post.to_i) %>>
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading"><a href="/users/<%= Post.find(post.to_i).user_id %>"><%= "#{Post.find(post.to_i).full_name}" %></a></h4>
+            <p><%= post.body %></p>
+            <a href="/posts/<%= post.id %>">Link to this post</a>
+            <% if session[:user_id] == @user.id %>
+              <span> | </span><a href="/posts/<%= post.id %>/edit">Edit this post</a><span> | </span>
+              <a href="/posts/<%= post.id %>/delete">Delete this post</a>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+  </div>
+</div>
+<% end %>
+
 <% else %>
   <h1>You must be logged in to look at member profiles!</h1>
 <% end %>

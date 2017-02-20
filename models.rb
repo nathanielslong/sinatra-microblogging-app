@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
 
   validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/  }
   validates_length_of :password, minimum: 7
+  
+  def feed
+    posts = Post.where("user_id IN (?) OR user_id = ?", followed_ids, id).map(&:id)
+  end
 
   def follow!(user)
     followed << user
