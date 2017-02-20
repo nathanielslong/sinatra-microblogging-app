@@ -81,25 +81,26 @@
 <div class="panel panel-default">
   <div class="panel-heading">User Posts</div>
   <div class="panel-body">
-    <% if posts.count == 0 %>
+    <% if @posts.count == 0 %>
       <div class="media">
         No posts to display!
       </div>
 
     <% else %>
 
-      <% while i < posts.count %>
+      <% counter = 0 %>
+      <% while counter < @posts.count do %>
         <div class="media">
           <a class="pull-left" href="#">
-            <img class="media-object" src=<%= User.where(posts[counter].user_id) %>>
+            <img class="media-object" src=<%= User.where(@posts[counter].user_id) %>>
           </a>
           <div class="media-body">
-            <h4 class="media-heading"><a href="/users/<%= posts[counter].user_id %>"><%= "#{User.where(posts[counter]).fullname}" %></a></h4>
-            <p><%= posts[counter].body %></p>
-            <a href="/posts/<%= posts[counter].id %>">Link to this post</a>
+            <h4 class="media-heading"><a href="/users/<%= @posts[counter].user_id %>"><%= "#{User.where(@posts[counter]).fullname}" %></a></h4>
+            <p><%= @posts[counter].body %></p>
+            <a href="/posts/<%= @posts[counter].id %>">Link to this post</a>
             <% if session[:user_id] == @user.id %>
-              <span> | </span><a href="/posts/<%= posts[counter].id %>/edit">Edit this post</a><span> | </span>
-              <a href="/posts/<%= posts[counter].id %>/delete">Delete this post</a>
+              <span> | </span><a href="/posts/<%= @posts[counter].id %>/edit">Edit this post</a><span> | </span>
+              <a href="/posts/<%= @posts[counter].id %>/delete">Delete this post</a>
             <% end %>
           </div>
         </div>

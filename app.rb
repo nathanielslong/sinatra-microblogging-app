@@ -77,7 +77,7 @@ end
 
 get '/users/:id' do
   @user = User.find(params[:id])
-  posts = @user.feed
+  @posts = @user.feed
   counter = 0
 
   erb :user_profile
