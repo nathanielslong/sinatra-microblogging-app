@@ -9,10 +9,7 @@ class User < ActiveRecord::Base
 
   validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/  }
   validates_length_of :password, minimum: 7
-  
-  def feed
-    Post.where("user_id IN (?) OR user_id = ?", followed_ids, id).to_a
-  end
+
 
   def follow!(user)
     followed << user
@@ -28,6 +25,10 @@ class Post < ActiveRecord::Base
   belongs_to :user
 
   validates :body, length: { maximum: 150 }
+
+  def self.feed(user)
+    where("user_id IN (?) OR user_id = ?", user.followed_ids, user.id).to_a
+  end
 end
 
 class Relationship < ActiveRecord::Base

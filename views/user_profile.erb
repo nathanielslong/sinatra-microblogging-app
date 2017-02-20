@@ -16,7 +16,7 @@
     </form>
     <button class="span4 proj-div btn-link" data-toggle="modal" data-target="#deleteModal">Delete your account</button>
 
-  <% elsif @user.followers.include?(logged_in) %>
+  <% elsif @user.followers.include?(User.find(session[:user_id])) %>
 
     <h3>You follow this user!</h3>
     <form action="/users/<%= @user.id %>/follow" method="POST">
@@ -78,38 +78,36 @@
   </div>
 <% end %>
 
-<%# <div class="panel panel-default"> %>
-<%#   <div class="panel-heading">User Posts</div> %>
-<%#   <div class="panel-body"> %>
-<%#     <% if @posts.count == 0 %1> %>
-<%#       <div class="media"> %>
-<%#         No posts to display! %>
-<%#       </div> %>
+<div class="panel panel-default">
+  <div class="panel-heading">Following Posts</div>
+  <div class="panel-body">
+    <% if @posts.empty? %>
+      <div class="media">
+        No posts to display!
+      </div>
 
-<%#     <% else %1> %>
+    <% else %>
 
-<%#       <% counter = 0 %1> %>
-<%#       <% while counter < @posts.count do %1> %>
-<%#         <div class="media"> %>
-<%#           <a class="pull-left" href="#"> %>
-<%#             <img class="media-object" src=<%= User.where(@posts[counter].user_id) %1>> %>
-<%#           </a> %>
-<%#           <div class="media-body"> %>
-<%#             <h4 class="media-heading"><a href="/users/<%= @posts[counter].user_id %1>"><%= "#{User.where(@posts[counter]).fullname}" %1></a></h4> %>
-<%#             <p><%= @posts[counter].body %1></p> %>
-<%#             <a href="/posts/<%= @posts[counter].id %1>">Link to this post</a> %>
-<%#             <% if session[:user_id] == @user.id %1> %>
-<%#               <span> | </span><a href="/posts/<%= @posts[counter].id %1>/edit">Edit this post</a><span> | </span> %>
-<%#               <a href="/posts/<%= @posts[counter].id %1>/delete">Delete this post</a> %>
-<%#             <% end %1> %>
-<%#           </div> %>
-<%#         </div> %>
-<%#         <% counter += 1 %1> %>
-<%#       <% end %1> %>
+      <% @posts.each do |post| %>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src=<%= User.find(post.user_id).picture %>>
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading"><a href="/users/<%= post.user_id %>"><%= "#{User.find(post.user_id).full_name}"%></a></h4>
+            <p><%= post.body %></p>
+            <a href="/posts/<%= post.id %>">Link to this post</a>
+            <% if session[:user_id] == @user.id %>
+              <span> | </span><a href="/posts/<%= post.id %>/edit">Edit this post</a><span> | </span>
+              <a href="/posts/<%= post.id %>/delete">Delete this post</a>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
 
-<%#   </div> %>
-<%# </div> %>
-<%# <% end %1> %>
+  </div>
+</div>
+<% end %>
 
 <% else %>
   <h1>You must be logged in to look at member profiles!</h1>

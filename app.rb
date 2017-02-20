@@ -77,7 +77,7 @@ end
 
 get '/users/:id' do
   @user = User.find(params[:id])
-  @posts = @user.feed
+  @posts = Post.feed(@user)
 
   erb :user_profile
 end
