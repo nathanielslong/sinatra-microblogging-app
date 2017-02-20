@@ -97,10 +97,6 @@
             <h4 class="media-heading"><a href="/users/<%= post.user_id %>"><%= "#{User.find(post.user_id).full_name}"%></a></h4>
             <p><%= post.body %></p>
             <a href="/posts/<%= post.id %>">Link to this post</a>
-            <% if session[:user_id] == @user.id %>
-              <span> | </span><a href="/posts/<%= post.id %>/edit">Edit this post</a><span> | </span>
-              <a href="/posts/<%= post.id %>/delete">Delete this post</a>
-            <% end %>
           </div>
         </div>
       <% end %>
