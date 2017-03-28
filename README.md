@@ -6,7 +6,7 @@ Introducing QuickCuts!
 
 Nothing but concise music reviews. Find your favorite albums, and discover new music!
 
-To test the deployed project:
+To test the deployed project at https://quickcuts.herokuapp.com/ :
 
 Email: test@user.com
 Password: testuser
